@@ -1,0 +1,6 @@
+package com.android.qcomfeatureconfig;
+
+public final class QcomLowRamConfig {
+    public static final boolean TARGET_QCOM_IOT_LOW_RAM = __TARGET_QCOM_IOT_LOW_RAM_VALUE__;
+}
+
