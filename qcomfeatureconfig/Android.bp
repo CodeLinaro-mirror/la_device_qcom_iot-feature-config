@@ -1,0 +1,37 @@
+soong_config_module_type {
+    name: "qcomfeatureconfig_java_library",
+    module_type: "java_library",
+    config_namespace: "qcomfeatureconfig",
+    bool_variables: ["iotlowram",],
+    properties: [
+        "srcs",
+    ],
+}
+
+genrule {
+    name: "qcomlowramconfig_java_gen",
+    srcs: ["QcomLowRamConfigTemplate_java"],
+    out: ["QcomLowRamConfig.java"],
+    cmd: "echo \"Generating QcomLowRamConfig.java\" && sed 's/__TARGET_QCOM_IOT_LOW_RAM_VALUE__/true/' $(location QcomLowRamConfigTemplate_java) > $(out)",
+}
+
+
+genrule {
+    name: "qcomlowramconfig_java_gen_default",
+    srcs: ["QcomLowRamConfigTemplate_java"],
+    out: ["QcomLowRamConfig.java"],
+    cmd: "echo \"Generating default QcomLowRamConfig.java\" && sed 's/__TARGET_QCOM_IOT_LOW_RAM_VALUE__/false/' $(location QcomLowRamConfigTemplate_java) > $(out)",
+}
+
+qcomfeatureconfig_java_library {
+    name: "qcomFeatureConfigLib",
+    sdk_version: "current",
+    soong_config_variables: {
+        iotlowram: {
+            srcs: [":qcomlowramconfig_java_gen"],
+            conditions_default:{
+                srcs: [":qcomlowramconfig_java_gen_default"],
+            },
+        },
+    },
+}
