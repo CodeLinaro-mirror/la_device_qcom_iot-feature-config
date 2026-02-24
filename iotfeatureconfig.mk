@@ -20,3 +20,7 @@ endif
 ifeq ($(TARGET_QCOM_IOT_SCANCHANNEL), true)
 $(call soong_config_set,qcomfeatureconfig,iotscanchannel,$(TARGET_QCOM_IOT_SCANCHANNEL))
 endif
+
+ifeq ($(TARGET_QCOM_IOT_BT_EXT), true)
+$(call soong_config_set,qcomfeatureconfig,iotbtext,$(TARGET_QCOM_IOT_BT_EXT))
+endif
