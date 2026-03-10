@@ -41,7 +41,8 @@ qcomfeatureconfig_java_library {
     name: "qcomFeatureConfigLib",
     sdk_version: "current",
     apex_available: [
-        "com.android.btservices",
+        "//apex_available:platform",
+        "//apex_available:anyapex",
     ],
     min_sdk_version: "33",
     soong_config_variables: {
@@ -56,6 +57,6 @@ qcomfeatureconfig_java_library {
             conditions_default:{
                 srcs: [":qcomscanchannelconfig_java_gen_default"],
             },
-        }
+        },
     },
 }
