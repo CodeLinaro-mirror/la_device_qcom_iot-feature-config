@@ -16,3 +16,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 DEVICE_PACKAGE_OVERLAYS += device/qcom/iot-feature-config/iotlowram/overlay
 
 endif
+
+ifeq ($(TARGET_QCOM_IOT_SCANCHANNEL), true)
+$(call soong_config_set,qcomfeatureconfig,iotscanchannel,$(TARGET_QCOM_IOT_SCANCHANNEL))
+endif

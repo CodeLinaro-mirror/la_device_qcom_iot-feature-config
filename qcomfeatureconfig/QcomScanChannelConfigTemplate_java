@@ -1,0 +1,10 @@
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+*/
+
+package com.android.qcomfeatureconfig;
+
+public final class QcomScanChannelConfig {
+    public static final boolean TARGET_QCOM_IOT_SCANCHANNEL = __TARGET_QCOM_IOT_SCANCHANNEL_VALUE__;
+}

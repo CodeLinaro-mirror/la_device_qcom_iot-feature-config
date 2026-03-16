@@ -2,7 +2,7 @@ soong_config_module_type {
     name: "qcomfeatureconfig_java_library",
     module_type: "java_library",
     config_namespace: "qcomfeatureconfig",
-    bool_variables: ["iotlowram",],
+    bool_variables: ["iotlowram","iotscanchannel",],
     properties: [
         "srcs",
     ],
@@ -23,14 +23,39 @@ genrule {
     cmd: "echo \"Generating default QcomLowRamConfig.java\" && sed 's/__TARGET_QCOM_IOT_LOW_RAM_VALUE__/false/' $(location QcomLowRamConfigTemplate_java) > $(out)",
 }
 
+genrule {
+    name: "qcomscanchannelconfig_java_gen",
+    srcs: ["QcomScanChannelConfigTemplate_java"],
+    out: ["QcomScanChannelConfig.java"],
+    cmd: "echo \"Generating QcomScanChannelConfig.java\" && sed 's/__TARGET_QCOM_IOT_SCANCHANNEL_VALUE__/true/' $(location QcomScanChannelConfigTemplate_java) > $(out)",
+}
+
+genrule {
+    name: "qcomscanchannelconfig_java_gen_default",
+    srcs: ["QcomScanChannelConfigTemplate_java"],
+    out: ["QcomScanChannelConfig.java"],
+    cmd: "echo \"Generating default QcomScanChannelConfig.java\" && sed 's/__TARGET_QCOM_IOT_SCANCHANNEL_VALUE__/false/' $(location QcomScanChannelConfigTemplate_java) > $(out)",
+}
+
 qcomfeatureconfig_java_library {
     name: "qcomFeatureConfigLib",
     sdk_version: "current",
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    min_sdk_version: "33",
     soong_config_variables: {
         iotlowram: {
             srcs: [":qcomlowramconfig_java_gen"],
             conditions_default:{
                 srcs: [":qcomlowramconfig_java_gen_default"],
+            },
+        },
+        iotscanchannel: {
+            srcs: [":qcomscanchannelconfig_java_gen"],
+            conditions_default:{
+                srcs: [":qcomscanchannelconfig_java_gen_default"],
             },
         },
     },
