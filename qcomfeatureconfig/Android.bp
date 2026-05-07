@@ -54,7 +54,7 @@ genrule {
 
 qcomfeatureconfig_java_library {
     name: "qcomFeatureConfigLib",
-    sdk_version: "current",
+    sdk_version: "module_current",
     apex_available: [
         "//apex_available:platform",
         "//apex_available:anyapex",
