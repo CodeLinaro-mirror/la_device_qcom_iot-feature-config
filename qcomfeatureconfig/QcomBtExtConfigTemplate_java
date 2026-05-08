@@ -1,0 +1,9 @@
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+package com.android.qcomfeatureconfig;
+
+public final class QcomBtExtConfig {
+    public static final boolean TARGET_QCOM_IOT_BT_EXT = __TARGET_QCOM_IOT_BT_EXT_VALUE__;
+}
