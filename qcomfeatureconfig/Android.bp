@@ -2,7 +2,7 @@ soong_config_module_type {
     name: "qcomfeatureconfig_java_library",
     module_type: "java_library",
     config_namespace: "qcomfeatureconfig",
-    bool_variables: ["iotlowram","iotscanchannel",],
+    bool_variables: ["iotlowram","iotscanchannel", "iotbtext"],
     properties: [
         "srcs",
     ],
@@ -37,6 +37,21 @@ genrule {
     cmd: "echo \"Generating default QcomScanChannelConfig.java\" && sed 's/__TARGET_QCOM_IOT_SCANCHANNEL_VALUE__/false/' $(location QcomScanChannelConfigTemplate_java) > $(out)",
 }
 
+
+genrule {
+    name: "qcombtextconfig_java_gen",
+    srcs: ["QcomBtExtConfigTemplate_java"],
+    out: ["QcomBtExtConfig.java"],
+    cmd: "echo \"Generating QcomBtExtConfig.java\" && sed 's/__TARGET_QCOM_IOT_BT_EXT_VALUE__/true/' $(location QcomBtExtConfigTemplate_java) > $(out)",
+}
+
+genrule {
+    name: "qcombtextconfig_java_gen_default",
+    srcs: ["QcomBtExtConfigTemplate_java"],
+    out: ["QcomBtExtConfig.java"],
+    cmd: "echo \"Generating QcomBtExtConfig.java\" && sed 's/__TARGET_QCOM_IOT_BT_EXT_VALUE__/false/' $(location QcomBtExtConfigTemplate_java) > $(out)",
+}
+
 qcomfeatureconfig_java_library {
     name: "qcomFeatureConfigLib",
     sdk_version: "current",
@@ -56,6 +71,12 @@ qcomfeatureconfig_java_library {
             srcs: [":qcomscanchannelconfig_java_gen"],
             conditions_default:{
                 srcs: [":qcomscanchannelconfig_java_gen_default"],
+            },
+        },
+        iotbtext: {
+            srcs: [":qcombtextconfig_java_gen"],
+            conditions_default: {
+                srcs: [":qcombtextconfig_java_gen_default"]
             },
         },
     },
