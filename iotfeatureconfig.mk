@@ -24,3 +24,7 @@ endif
 ifeq ($(TARGET_QCOM_IOT_BT_EXT), true)
 $(call soong_config_set,qcomfeatureconfig,iotbtext,$(TARGET_QCOM_IOT_BT_EXT))
 endif
+
+ifeq ($(TELEPHONY_FEATURE_LIST_ENABLED), true)
+$(call soong_config_set,qcomfeatureconfig,telephonyfeaturelist,$(TELEPHONY_FEATURE_LIST_ENABLED))
+endif

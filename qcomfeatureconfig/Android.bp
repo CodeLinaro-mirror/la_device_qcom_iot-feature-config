@@ -2,7 +2,7 @@ soong_config_module_type {
     name: "qcomfeatureconfig_java_library",
     module_type: "java_library",
     config_namespace: "qcomfeatureconfig",
-    bool_variables: ["iotlowram","iotscanchannel", "iotbtext"],
+    bool_variables: ["iotlowram","iotscanchannel", "iotbtext", "telephonyfeaturelist"],
     properties: [
         "srcs",
     ],
@@ -52,9 +52,23 @@ genrule {
     cmd: "echo \"Generating QcomBtExtConfig.java\" && sed 's/__TARGET_QCOM_IOT_BT_EXT_VALUE__/false/' $(location QcomBtExtConfigTemplate_java) > $(out)",
 }
 
+genrule {
+    name: "qcomtelephonyfeaturelistconfig_java_gen",
+    srcs: ["QcomTelephonyFeatureListConfigTemplate_java"],
+    out: ["QcomTelephonyFeatureListConfig.java"],
+    cmd: "echo \"Generating QcomTelephonyFeatureListConfig.java\" && sed 's/__TELEPHONY_FEATURE_LIST_ENABLED_VALUE__/true/' $(location QcomTelephonyFeatureListConfigTemplate_java) > $(out)",
+}
+
+genrule {
+    name: "qcomtelephonyfeaturelistconfig_java_gen_default",
+    srcs: ["QcomTelephonyFeatureListConfigTemplate_java"],
+    out: ["QcomTelephonyFeatureListConfig.java"],
+    cmd: "echo \"Generating default QcomTelephonyFeatureListConfig.java\" && sed 's/__TELEPHONY_FEATURE_LIST_ENABLED_VALUE__/false/' $(location QcomTelephonyFeatureListConfigTemplate_java) > $(out)",
+}
+
 qcomfeatureconfig_java_library {
     name: "qcomFeatureConfigLib",
-    sdk_version: "current",
+    sdk_version: "module_current",
     apex_available: [
         "//apex_available:platform",
         "//apex_available:anyapex",
@@ -77,6 +91,12 @@ qcomfeatureconfig_java_library {
             srcs: [":qcombtextconfig_java_gen"],
             conditions_default: {
                 srcs: [":qcombtextconfig_java_gen_default"]
+            },
+        },
+        telephonyfeaturelist: {
+            srcs: [":qcomtelephonyfeaturelistconfig_java_gen"],
+            conditions_default: {
+                srcs: [":qcomtelephonyfeaturelistconfig_java_gen_default"],
             },
         },
     },
