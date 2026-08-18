@@ -1,0 +1,9 @@
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+package com.android.qcomfeatureconfig;
+
+public final class QcomTelephonyFeatureListConfig {
+    public static final boolean TELEPHONY_FEATURE_LIST_ENABLED = __TELEPHONY_FEATURE_LIST_ENABLED_VALUE__;
+}
