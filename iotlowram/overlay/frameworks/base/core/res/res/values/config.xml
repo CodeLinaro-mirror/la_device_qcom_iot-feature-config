@@ -37,4 +37,17 @@
     <bool name="config_supportsMultiWindow">false</bool>
     <bool name="config_enableWallpaperService">false</bool>
     <bool name="config_checkWallpaperAtBoot">false</bool>
+    <bool name="config_enableVirtualDeviceManager">false</bool>
+
+    <string name="config_wearServiceComponent" translatable="false">@null</string>
+    <string name="config_defaultAmbientContextDetectionService" translatable="false">@null</string>
+    <string name="config_defaultSystemCaptionsManagerService" translatable="false">@null</string>
+    <string name="config_defaultContentCaptureService" translatable="false">@null</string>
+    <string name="config_defaultTranslationService" translatable="false">@null</string>
+    <string name="config_defaultSearchUiService" translatable="false">@null</string>
+    <string name="config_defaultContentSuggestionsService" translatable="false">@null</string>
+    <string name="config_defaultSmartspaceService" translatable="false">@null</string>
+    <string name="config_defaultMusicRecognitionService" translatable="false">@null</string>
+    <string name="config_defaultWallpaperEffectsGenerationService" translatable="false">@null</string>
+    <string name="config_deviceSpecificAudioService" translatable="false">@null</string>
 </resources>
